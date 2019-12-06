@@ -1,0 +1,57 @@
+{
+    "_id" : 33,
+    "name" : "奔驰宝马",
+    "alias" : "bcbm",
+    "icon" : "/assets/ui/game/icon_game_dt_00.png",
+    "url" : "../bcmb/",
+    "jumpUrl" : true,
+    "gameStyle" : "CARD_GAME",
+    "gameType" : "STAKE",
+    "state" : "NORMAL",
+    "sort" : 849,
+    "robotService" : false,
+    "betAnalysis" : true,
+    "retryConnection" : false,
+    "updateTime" : ISODate("2019-09-04T15:39:28.124+08:00"),
+    "createTime" : ISODate("2019-09-04T15:31:53.670+08:00"),
+    "rooms" : [
+        {
+            "roomId" : 206,
+            "name" : "新手房",
+            "icon" : "/assets/ui/game/icon_game_dt_00.png",
+            "roomType" : "NOVICE",
+            "state" : "NORMAL",
+            "sort" : 1,
+            "config" : {
+                "outsGames" : 10,
+                "commissionRate" : "0.03",
+                "minEntry" : 0,
+                "maxBet" : 1000,
+                "chip02" : 10,
+                "callsGames" : 7,
+                "minBet" : 50,
+                "chip03" : 50,
+                "chip01" : 1,
+                "rtpRate" : "0.95",
+                "chip04" : 100,
+                "chip05" : 1000,
+                "fllMaxBet" : 1000,
+                "lbjnMaxBet" : 1000,
+                "msldMaxBet" : 1000,
+                "bsjMaxBet" : 1000,
+                "bcMaxBet" : 1000,
+                "bmMaxBet" : 1000,
+                "btMaxBet" : 1000,
+                "dzMaxBet" : 1000
+            },
+            "tables" : [
+                {
+                    "tableId" : "225",
+                    "tableName" : "新手房A桌",
+                    "state" : "NORMAL"
+                }
+            ]
+        }
+    ],
+    "classify" : 2
+}

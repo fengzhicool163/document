@@ -1,0 +1,355 @@
+
+
+var gameConfig = db.base_game_config.findOne({_id:30})
+var rooms = gameConfig.rooms;
+for(room of rooms){
+     var config = room.config;
+    if(room.name == '新手房'){
+        
+         config.defaultMinPool = "2000";
+         config.defaultMaxPool = "4000";
+         config.defaultMaxPoolBig = "6000";
+         config.r1 = "0.35";
+         config.r2 = "0.35";
+         config.commissionRate ="0.03";
+         config.redBlackRate ="2";
+         config.rtp = "0.95";
+     } 
+    if(room.name == '进阶房'){
+         
+         config.defaultMinPool = "5000";
+         config.defaultMaxPool = "10000";
+         config.defaultMaxPoolBig = "15000";
+         config.r1 = "0.35";
+         config.r2 = "0.35";
+         config.commissionRate ="0.03";
+         config.redBlackRate ="2";
+         config.rtp = "0.95";
+     } 
+    if(room.name == '高手房'){
+         
+         config.defaultMinPool = "15000";
+         config.defaultMaxPool = "30000";
+         config.defaultMaxPoolBig = "45000";
+         config.r1 = "0.35";
+         config.r2 = "0.35";
+         config.commissionRate ="0.03";
+         config.redBlackRate ="2";
+         config.rtp = "0.95";
+     } 
+    if(room.name == "土豪房"){
+        
+         config.defaultMinPool = "25000";
+         config.defaultMaxPool = "50000";
+         config.defaultMaxPoolBig = "75000";
+         config.r1 = "0.35";
+         config.r2 = "0.35";
+         config.commissionRate ="0.03";
+         config.redBlackRate ="2";
+         config.rtp = "0.95";
+         config.maxBet = "15000";
+     } 
+ }
+ gameConfig.rooms = rooms;
+
+db.base_game_config.save(gameConfig);
+print(gameConfig)
+
+
+var setting = {
+    "_id" : 30,
+    "gameName" : "红黑大战",
+    "gameAlias" : "hhdz",
+    "adapt" : "defaultAdapt",
+    "handler" : "stakeHandler",
+    "listener" : "defaultListener",
+    "sort" : 959.0,
+    "params" : [ 
+        {
+            "key" : "minEntry",
+            "required" : false,
+            "title" : "可投注余额要求",
+            "sort" : 1.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "needPay",
+            "required" : true,
+            "title" : "可投注充值要求",
+            "sort" : 1.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+
+        {
+            "key" : "defaultMinPool",
+            "required" : true,
+            "title" : "库存下限",
+            "sort" : 1.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        },
+        {
+            "key" : "defaultMaxPool",
+            "required" : true,
+            "title" : "库存上限",
+            "sort" : 1.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        },
+        {
+            "key" : "defaultMaxPoolBig",
+            "required" : true,
+            "title" : "库存上限最大值",
+            "sort" : 1.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        },
+
+
+        {
+            "key" : "r1",
+            "required" : true,
+            "title" : "作弊概率",
+            "sort" : 1.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        },
+                {
+            "key" : "r2",
+            "required" : true,
+            "title" : "反作弊概率",
+            "sort" : 1.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        },
+
+        {
+            "key" : "maxBet",
+            "required" : true,
+            "title" : "投注上限",
+            "sort" : 2.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "commissionRate",
+            "title" : "抽水",
+            "sort" : 3.0,
+            "required" : true,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 1.0
+        }, 
+        {
+            "key" : "minJackpot",
+            "required" : false,
+            "title" : "奖池下限",
+            "sort" : 4.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "maxJackpot",
+            "required" : false,
+            "title" : "奖池上限",
+            "sort" : 5.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "chip01",
+            "required" : false,
+            "title" : "筹码1",
+            "sort" : 6.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "chip02",
+            "required" : false,
+            "title" : "筹码2",
+            "sort" : 7.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "chip03",
+            "required" : false,
+            "title" : "筹码3",
+            "sort" : 8.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "chip04",
+            "required" : false,
+            "title" : "筹码4",
+            "sort" : 9.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "redBlackRate",
+            "required" : false,
+            "title" : "红黑赔率",
+            "sort" : 10.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "bzRate",
+            "required" : false,
+            "title" : "豹子赔率",
+            "sort" : 11.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "sjRate",
+            "required" : false,
+            "title" : "顺金赔率",
+            "sort" : 12.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "jhRate",
+            "required" : false,
+            "title" : "金花赔率",
+            "sort" : 13.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "szRate",
+            "required" : false,
+            "title" : "顺子赔率",
+            "sort" : 14.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "dzRate",
+            "required" : false,
+            "title" : "对子赔率",
+            "sort" : 15.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "checkPeriod",
+            "required" : false,
+            "title" : "rtp检测周期",
+            "sort" : 16.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 2147483647.0
+        }, 
+        {
+            "key" : "rtpRate",
+            "required" : true,
+            "title" : "预设RTP%",
+            "sort" : 17.0,
+            "type" : "DOUBLE",
+            "min" : 0.0,
+            "max" : 1.0
+        }
+    ]
+}
+
+db.base_game_setting.save(setting);
+
+
+
+function initBrandGameInfo(){
+    var brands = db.getCollection('brand').find({});
+   
+    for (var i = 0; i < brands.length(); i++) {
+        var brand = brands[i];
+        for(var k = 0; k<brand.games.length; k++){
+            var game = brand.games[k];
+            if(game.gameId==30){
+                if(game.rooms){
+                   for(var r=0; r<game.rooms.length; r++){
+                       var room = game.rooms[r];
+                       if(room.config){     
+                      var config =  room.config    ;     
+                      if(room.tables){             
+						    if(room.tables[0].tableName.indexOf("新手房")> -1){
+						        
+						         config.defaultMinPool = "2000";
+						         config.defaultMaxPool = "4000";
+						         config.defaultMaxPoolBig = "6000";
+						         config.r1 = "0.35";
+						         config.r2 = "0.35";
+						         config.commissionRate ="0.03";
+						         config.redBlackRate ="2";
+						         config.rtp = "0.95";
+						     } 
+						    if(room.tables[0].tableName.indexOf("进阶房")> -1){
+						         
+						         config.defaultMinPool = "5000";
+						         config.defaultMaxPool = "10000";
+						         config.defaultMaxPoolBig = "15000";
+						         config.r1 = "0.35";
+						         config.r2 = "0.35";
+						         config.commissionRate ="0.03";
+						         config.redBlackRate ="2";
+						         config.rtp = "0.95";
+						     } 
+						    if(room.tables[0].tableName.indexOf("高手房")> -1){
+						         
+						         config.defaultMinPool = "15000";
+						         config.defaultMaxPool = "30000";
+						         config.defaultMaxPoolBig = "45000";
+						         config.r1 = "0.35";
+						         config.r2 = "0.35";
+						         config.commissionRate ="0.03";
+						         config.redBlackRate ="2";
+						         config.rtp = "0.95";
+						     } 
+						    if(room.tables[0].tableName.indexOf("土豪房")> -1){
+						        
+						         config.defaultMinPool = "25000";
+						         config.defaultMaxPool = "50000";
+						         config.defaultMaxPoolBig = "75000";
+						         config.r1 = "0.35";
+						         config.r2 = "0.35";
+						         config.commissionRate ="0.03";
+						         config.redBlackRate ="2";
+						         config.rtp = "0.95";
+						         config.maxBet = "15000";
+						     }  
+                       }   
+                       }
+                   }   
+                }   
+            }   
+        }
+        db.brand.save(brand);
+       }
+}
+
+initBrandGameInfo();
