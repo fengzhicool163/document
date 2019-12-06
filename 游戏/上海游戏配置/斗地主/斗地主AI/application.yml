@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: landlord-ai
+  cloud:
+    consul:
+      host: 172.19.44.42
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        healthCheckInterval: 10s
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    multipart:
+      enabled: false
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+    favicon:
+      enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    time-zone: GMT+8
+  redis:
+    host: 192.168.0.4
+    port: 9852
+    database: 11
+    lettuce:
+      pool:
+        max-active: 20
+        max-idle: 20
+        max-wait: 30000
+        min-idle: 1
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+logging:
+  config: classpath:logback-spring.xml
+
+server:
+  port: 9099
+
+ai:
+  threads: 150
+  wait-max-seconds: 2
+  max-math-seconds: 2
+  max-wait: 500

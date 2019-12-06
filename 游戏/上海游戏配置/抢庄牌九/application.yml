@@ -1,0 +1,125 @@
+spring:
+  application:
+    name: game-qzpj-app
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    multipart:
+      enabled: false
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+    favicon:
+      enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    time-zone: GMT+8
+  redis:
+    host: 192.168.1.57
+    port: 6379
+    database: 7
+    lettuce:
+      pool:
+        max-active: 50
+        max-idle: 50
+        max-wait: 8000
+        min-idle: 30
+  data:
+    redis:
+      repositories:
+        enabled: false
+    mongodb:
+      uri: mongodb://sec_game:1qaz2wsx@192.168.1.96:20000,192.168.1.97:20000,192.168.1.98:20000
+      database: game
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        healthCheckInterval: 10s
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: game_center_app
+    password: Jxinternet@1234
+    url: jdbc:mysql://192.168.1.93:3306/gcenter?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf8
+    type: com.alibaba.druid.pool.DruidDataSource
+
+logging:
+  config: classpath:logback-spring.xml
+
+server:
+  port: 8116
+
+feign:
+  hystrix:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,prometheus
+
+rocket:
+  namesrv-address: 192.168.1.157:9876;192.168.1.158:9876
+  consumer-group: pg_consumer_group
+  consumer-topic: cg_pg_in
+  producer-group: pg_producer_group
+  producer-topic: cg_pg_out
+  system_group: game_interior_consumer_group
+  system_topic: game_interior_in
+
+customer:
+  datasource:
+    gCenter:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://192.168.1.93:3306/gcenter?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf8
+      driver-class-name: com.mysql.jdbc.Driver
+      username: game_center_app
+      password: Jxinternet@1234
+    masterDataSource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://192.168.1.93:3306/balance?useUnicode=true&characterEncoding=utf8&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: sec_balance
+      password: Jxinternet@1234
+    slaveDataSource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://192.168.1.93:3306/balance?useUnicode=true&characterEncoding=utf8&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: sec_balance
+      password: Jxinternet@1234
+
+game:
+  id: '42'
+  name: '抢庄牌九'
+  version: 'V1'
+  match-after-timeout-ms: 3000
+  qz-ready-timeout-ms: 3000
+  qz-timeout-ms: 5000
+  bet-timeout-ms: 5000
+  open-card-timeout-ms: 9000
+  settle-timeout-ms: 4000
+  next-ready-timeout-ms: 5000
+  max-play-times: 4
+  table-cache-second: 3600
+  max-table-cycle-seconds: 60
+  timeout:
+    threads: 3
+    wait-queue-capacity: 30
+  match:
+    threads: 3
+    wait-queue-capacity: 15
+    max-person: 4
+    max-wait-seconds: 3
+  api:
+    enable-inner-version: true
+
+pr-configure:
+  init-delay-mills: 100
+  delay-seconds: 3

@@ -1,0 +1,74 @@
+server:
+  port: 8119
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: ms-fish-service
+  datasource:
+    url: jdbc:mysql://192.168.1.93:3306/gcenter?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf8
+    username: game_center_app
+    password: Jxinternet@1234
+  redis:
+    host: 192.168.1.57
+    port: 6379
+    database: 7
+    lettuce:
+      pool:
+        max-active: 50
+        max-idle: 50
+        max-wait: 8000
+        min-idle: 30
+  data:
+    redis:
+      repositories:
+        enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+  flyway:
+    locations: classpath:/db
+    enabled: true
+    encoding: utf-8
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        healthCheckInterval: 15s
+
+logging:
+  config: classpath:logback-spring.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,prometheus
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-handlers-package: com.mx.game.ms.fish.model
+  mapper-locations: classpath:/mapper/*.xml
+debug: true
+
+rocketmq:
+  namesAddr: 192.168.1.157:9876;192.168.1.158:9876
+  groupName: ${spring.application.name}
+
+game:
+  id: 90
+  name: 西游捕鱼
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1 

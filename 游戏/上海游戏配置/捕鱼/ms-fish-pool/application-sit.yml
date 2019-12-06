@@ -1,0 +1,58 @@
+server:
+  port: 8118
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: ms-fish-pool
+  redis:
+    host: 192.168.1.57
+    port: 6379
+    database: 7
+    lettuce:
+      pool:
+        max-active: 50
+        max-idle: 50
+        max-wait: 8000
+        min-idle: 30
+  data:
+    redis:
+      repositories:
+        enabled: false
+    mongodb:
+      database: game
+      uri: mongodb://sec_game:1qaz2wsx@192.168.1.96:20000,192.168.1.97:20000,192.168.1.98:20000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        healthCheckInterval: 15s
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+      org.springframework.data.mongodb.core: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,prometheus
+debug: true
+
+rocketmq:
+  namesAddr: 192.168.1.157:9876;192.168.1.158:9876
+  groupName: ${spring.application.name}
+
+ribbon:
+  ReadTimeout: 8000
+  ConnectTimeout: 8000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1

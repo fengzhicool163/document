@@ -1,0 +1,107 @@
+桌台状态：准备， 发牌， 下注， 比牌， 结算
+
+
+步骤：
+1，前端初始化，
+		a,请求服务器拉到当前桌台信息：（桌台总人数界定，金额限定）
+			桌台局数
+			桌台押注限额， 
+			桌台加入总人数，
+			桌台状态，
+			桌台押注区域金额，
+			桌台玩家可以投注的金币面额
+			当前玩家身边的玩家列表（玩家ID，玩家头像，玩家余额）
+		b,初始化成功则前端发送加入桌台成功，失败客户端retry，指定次数不成功则退出
+	
+2，服务端下发当前桌台状态 
+		
+		准备：	
+			{
+				code: 5001,
+				remainingTime:3				
+			}
+		
+		发牌：
+			{
+				code:5002，
+				remainingTime:3				
+			}
+		
+		下注：
+			下注阶段初始化信息
+			{
+				code:5003,
+				remainingTime:15，
+				betAreas:[
+					{	
+						areaName:aa
+						totalBet:10000,
+						myBet:200,
+						enabled:true
+					},
+					{
+						areaName:bb
+						totalBet:5000,
+						myBet:50，
+						enabled:true
+					},
+					{
+						areaName:xx
+						totalBet:1000,
+						myBet:0，
+						enabled:true
+					}，
+					{
+						areaName:yy
+						totalBet:0,
+						myBet:0，
+						enabled:false
+					}									
+				]
+			}
+			
+			定时发送它人投注：
+			{
+				code:5004,
+				remainingTime:15，
+				time:1346546331,
+				betDetail:[
+					{
+						"area":"aa",
+						"betMoney":"3000"
+					},
+					{
+						"area":"bb",
+						"betMoney":"6000"
+					}
+				]
+			}
+			
+			当前玩家实时投注响应：l
+			{
+				code:4001,
+				result:true,
+				betMoney:50,
+				area:xx,
+				msg:"成功",
+				time:1346546331
+			}
+			
+		比牌：
+			{
+				code: 5005
+				dragon:26
+				tiger:17
+				winner:dragon/tiger/peace
+			}
+		
+		结算：
+			{
+				code:5006,
+				
+			}
+		
+			
+		
+	
+	

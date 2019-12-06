@@ -1,0 +1,14 @@
+game:
+  id: '26'
+  name: '»¶ÀÖºì°ü'
+  version: 'V1'
+  table-cache-second: 900
+  max-table-cycle-seconds: 200
+  show_bet_num_timeout: 3500
+  wait_size_timeout: 5500
+  final_size_timeout: 1000
+  dice_timeout: 3500
+  settlement_timeout: 5000
+  next_timeout: 5000
+  wait_bet_timeout: 3000
+  open_table_bet_timeout: 2000

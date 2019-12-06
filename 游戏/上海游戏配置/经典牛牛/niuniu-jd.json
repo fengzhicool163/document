@@ -1,0 +1,243 @@
+db.base_game_config.find({_id: 45})
+db.base_game_config.deleteOne({_id: 45});
+db.base_game_config.save({ 
+    "_id" : NumberInt(45), 
+    "name" : "经典牛牛", 
+    "alias" : "jdnn", 
+    "icon" : "/assets/ui/game/icon_game_bj_00.png", 
+    "url" : "../g_jdnn/", 
+    "jumpUrl" : true, 
+    "gameStyle" : "SH", 
+    "gameType" : "ROUND", 
+    "state" : "NORMAL", 
+    "sort" : NumberInt(1000), 
+    "robotService" : true, 
+    "betAnalysis" : false, 
+    "retryConnection" : true, 
+    "updateTime" : ISODate("2019-11-18T07:16:53.171+0000"), 
+    "createTime" : ISODate("2019-11-18T07:16:53.171+0000"), 
+    "rooms" : [
+        {
+            "roomId" : NumberInt(13132), 
+            "name" : "新手房", 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "roomType" : "NOVICE", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0), 
+            "config" : {
+                "minEntry" : 0.6, 
+                "serviceCharge" : 0.0, 
+                "minBet" : 0.01, 
+                "maxBet" : -1, 
+                "commissionRate" : 0.03, 
+                "robotMinAmount" : 0.6, 
+                "checkPeriod" : 1.0, 
+                "rtpRate" : 0.98
+            }
+        }, 
+        {
+            "roomId" : NumberInt(13133), 
+            "name" : "进阶房", 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "roomType" : "ADVANCED", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0), 
+            "config" : {
+                "minEntry" : 20, 
+                "serviceCharge" : NumberInt(0), 
+                "minBet" : 1, 
+                "maxBet" : -1, 
+                "commissionRate" : 0.03, 
+                "robotMinAmount" : 20, 
+                "checkPeriod" : NumberInt(1), 
+                "rtpRate" : "0.96"
+            }
+        }, 
+        {
+            "roomId" : NumberInt(13134), 
+            "name" : "高手房", 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "roomType" : "SUPERIOR", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0), 
+            "config" : {
+                "minEntry" : 100, 
+                "serviceCharge" : 0.0, 
+                "minBet" : 5, 
+                "maxBet" : -1.0, 
+                "commissionRate" : 0.03, 
+                "robotMinAmount" : 100, 
+                "checkPeriod" : 1.0, 
+                "rtpRate" : 0.96
+            }
+        }, 
+        {
+            "roomId" : NumberInt(13135), 
+            "name" : "土豪房", 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "roomType" : "TUHAO", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0), 
+            "config" : {
+                "minEntry" : 400, 
+                "serviceCharge" : NumberInt(0), 
+                "minBet" : 20, 
+                "maxBet" : NumberInt(-1), 
+                "commissionRate" : 0.03, 
+                "robotMinAmount" : 400, 
+                "checkPeriod" : NumberInt(1), 
+                "rtpRate" : 0.96
+            }
+        }
+    ], 
+    "gamePlatform" : "", 
+    "classify" : NumberInt(2), 
+    "classifyAlias" : "SHZ", 
+    "enterLimit" : NumberInt(0), 
+    "classifyStatus" : "NORMAL", 
+    "classifySort" : NumberInt(2), 
+    "classifyIcon" : "https://cdn.pixabay.com/photo/2019/07/29/16/13/bald-eagle-4370916_960_720.jpg", 
+    "classifyGameIds" : "", 
+    "classifyGames" : [
+
+    ], 
+    "classifyOnlineFlag" : true
+});
+
+db.base_game_setting.find({_id: 45})
+db.base_game_setting.deleteOne({_id: 45});
+db.base_game_setting.insert({ 
+    "_id" : NumberInt(45), 
+    "gameName" : "经典牛牛", 
+    "gameAlias" : "niuniu_jd", 
+    "adapt" : "niuniuAdapt", 
+    "handler" : "niuniuHandler", 
+    "listener" : "niuniuListener", 
+    "sort" : NumberInt(1000), 
+    "params" : [
+        {
+            "key" : "commissionRate", 
+            "title" : "抽水", 
+            "sort" : NumberInt(5), 
+            "required" : true, 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(1)
+        }, 
+        {
+            "key" : "minBet", 
+            "required" : true, 
+            "title" : "准入下限", 
+            "sort" : NumberInt(1), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "maxBet", 
+            "required" : true, 
+            "title" : "准入上限", 
+            "sort" : NumberInt(2), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(-1), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "minEntry", 
+            "required" : true, 
+            "title" : "底注", 
+            "sort" : NumberInt(3), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "serviceCharge", 
+            "required" : true, 
+            "title" : "服务费", 
+            "sort" : NumberInt(4), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "robotMinAmount", 
+            "required" : false, 
+            "title" : "机器人初始金币", 
+            "sort" : NumberInt(6), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "checkPeriod", 
+            "required" : false, 
+            "title" : "rtp检测周期", 
+            "sort" : NumberInt(11), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "rtpRate", 
+            "required" : true, 
+            "title" : "预设RTP%", 
+            "sort" : NumberInt(12), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(1)
+        }
+    ]
+});
+
+db.brand.find({brand: "sqp01", "games.gameId": 45});
+db.brand.update({brand: "sqp01"},{$pull: {"games": {"gameId":45}}});
+db.brand.update({brand: "sqp01"},{$push: {"games":{
+            "gameId" : NumberInt(45), 
+            "gameName" : "经典牛牛", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(1000), 
+            "updateTime" : ISODate("2019-11-18T08:31:11.746+0000"), 
+            "createTime" : ISODate("2019-11-18T08:31:11.746+0000"), 
+            "rooms" : [
+                {
+                    "roomId" : NumberInt(5510), 
+                    "parentId" : NumberInt(13132), 
+                    "state" : "NORMAL", 
+                    "sort" : NumberInt(0), 
+                    "createTime" : ISODate("2019-11-18T08:31:11.747+0000"), 
+                    "updateTime" : ISODate("2019-11-04T02:11:52.006+0000")
+                }, 
+                {
+                    "roomId" : NumberInt(5511), 
+                    "parentId" : NumberInt(13133), 
+                    "state" : "NORMAL", 
+                    "sort" : NumberInt(0), 
+                    "createTime" : ISODate("2019-11-18T08:31:11.748+0000"), 
+                    "updateTime" : ISODate("2019-11-18T08:31:11.748+0000")
+                }, 
+                {
+                    "roomId" : NumberInt(5512), 
+                    "parentId" : NumberInt(13134), 
+                    "state" : "NORMAL", 
+                    "sort" : NumberInt(0), 
+                    "createTime" : ISODate("2019-11-18T08:31:11.749+0000"), 
+                    "updateTime" : ISODate("2019-11-04T02:12:24.893+0000")
+                }, 
+                {
+                    "roomId" : NumberInt(5513), 
+                    "parentId" : NumberInt(13135), 
+                    "state" : "NORMAL", 
+                    "sort" : NumberInt(0), 
+                    "createTime" : ISODate("2019-11-18T08:31:11.750+0000"), 
+                    "updateTime" : ISODate("2019-11-18T08:31:11.750+0000")
+                }
+            ], 
+            "classify" : NumberInt(2), 
+            "classifyStatus" : "NORMAL", 
+            "classifyGameIds" : "", 
+            "classifyOnlineFlag" : true, 
+            "gamePlatform" : "", 
+            "enterLimit" : NumberInt(0)
+        }}});
+

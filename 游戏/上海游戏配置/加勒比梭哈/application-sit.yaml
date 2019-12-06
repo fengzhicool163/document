@@ -1,0 +1,116 @@
+server:
+  port: 10120
+spring:
+  application:
+    name: game-jlbsh
+  profiles:
+    active: pro
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    multipart:
+      enabled: false
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+    favicon:
+      enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    time-zone: GMT+8
+  redis:
+    host: 192.168.4.80
+    port: 6379
+    password: moxi123
+    database: 9
+    lettuce:
+      pool:
+        max-active: 20
+        max-idle: 20
+        max-wait: 30000
+        min-idle: 1
+  data:
+    redis:
+      repositories:
+        enabled: false
+    mongodb:
+      uri: mongodb://sec_game:1qaz2wsx@192.168.1.96:20000,192.168.1.97:20000,192.168.1.98:20000
+      database: game
+  cloud:
+    consul:
+      host: 192.168.1.233
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        healthCheckInterval: 10s
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: abcd1234
+    url: jdbc:mysql://192.168.1.93:3306/gslots?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true
+    type: com.alibaba.druid.pool.DruidDataSource
+
+logging:
+  config: classpath:logback.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,prometheus
+
+rocket:
+  namesrv-address: 192.168.1.233:9876
+  consumer-group: jlbsh_consumer_group
+  consumer-topic: cg_jlbsh_in
+  producer-group: jlbsh_producer_group
+  producer-topic: cg_jlbsh_out
+  system_group: game_interior_consumer_group
+  system_topic: game_interior_in
+
+customer:
+  datasource:
+    gCenter:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://192.168.1.93:3306/gcenter?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf8
+      driver-class-name: com.mysql.jdbc.Driver
+      username: game_center_app
+      password: Jxinternet@1234
+    masterDataSource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://192.168.1.93:3306/balance?useUnicode=true&characterEncoding=utf8&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: sec_balance
+      password: Jxinternet@1234
+    slaveDataSource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://192.168.1.93:3306/balance?useUnicode=true&characterEncoding=utf8&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: sec_balance
+      password: Jxinternet@1234
+
+
+game:
+  id: '25'
+  name: 加勒比梭哈
+  match-timeout-ms: 5000
+  bottom-bet-timeout-ms: 12000
+  launch-wait-ms: 3000
+  operator-close-wait-ms: 11000
+  open-card-wait-ms: 3000
+  to-brand-wait-ms: 1000
+  counting-wait-ms: 2000
+  mosaic-gold-wait-ms: 3000
+  table-cache-second: 3600
+  timeout:
+    threads: 3
+    wait-queue-capacity: 30
+  match:
+    threads: 2
+    wait-queue-capacity: 15
+    max-wait-seconds: 5
+    max-person: 3

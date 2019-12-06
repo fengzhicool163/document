@@ -1,0 +1,35 @@
+
+game:
+  id: 28
+  name: 幸运五张
+  table-cache-second: 900
+  version: 'V1'
+  risk_enabled: true
+  max-table-cycle-seconds: 300
+  bet_timeout: 18000
+  size_timeout: 24000
+  wait_size_timeout: 27000
+  exchange_timeout: 20000
+  wait_exchange_timeout: 5000
+  confModel:
+    time:
+        - {"section":"10m","prefix":"0m"}
+    range:
+        - {"start":-100,"end":-10,"rate":100,"result":1}
+        - {"start":-10,"end":0,"rate":80,"result":1}
+        - {"start":0,"end":3,"rate":100,"result":0}
+        - {"start":3,"end":10,"rate":80,"result":-1}
+        - {"start":10,"end":100,"rate":100,"result":-1}
+  match:
+    wait-queue-capacity: 50
+    threads: 2
+    max-wait-seconds: 1
+    max-person: 1
+  timeout:
+    wait-queue-capacity: 100
+    threads: 2
+    batch-tasks: 5
+  api:
+     enable-inner-version: false
+
+

@@ -1,0 +1,196 @@
+db.base_game_setting.insert(
+{
+    "_id" : NumberInt(36), 
+    "gameName" : "两人麻将", 
+    "gameAlias" : "lrmj", 
+    "adapt" : "niuniuAdapt", 
+    "handler" : "niuniuHandler", 
+    "listener" : "niuniuListener", 
+    "sort" : NumberInt(1002), 
+    "params" : [
+        {
+            "key" : "commissionRate", 
+            "title" : "抽水", 
+            "sort" : NumberInt(5), 
+            "required" : true, 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(1)
+        }, 
+        {
+            "key" : "minEntry", 
+            "required" : true, 
+            "title" : "准入下限", 
+            "sort" : NumberInt(1), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "maxEntry", 
+            "required" : true, 
+            "title" : "准入上限", 
+            "sort" : NumberInt(2), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(-1), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "minBet", 
+            "required" : true, 
+            "title" : "底分", 
+            "sort" : NumberInt(3), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "serviceCharge", 
+            "required" : true, 
+            "title" : "服务费", 
+            "sort" : NumberInt(4), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }, 
+        {
+            "key" : "robotMinAmount", 
+            "required" : false, 
+            "title" : "机器人初始金币", 
+            "sort" : NumberInt(6), 
+            "type" : "DOUBLE", 
+            "min" : NumberInt(0), 
+            "max" : NumberInt(2147483647)
+        }
+    ]
+});
+
+db.base_game_config.insert(
+{ 
+    "_id" : NumberInt(36), 
+    "name" : "两人麻将", 
+    "alias" : "lrmj", 
+    "icon" : "/assets/ui/game/icon_game_lrmj_00.png", 
+    "url" : "../lrmj/", 
+    "jumpUrl" : true, 
+    "gameStyle" : "SH", 
+    "gameType" : "ROUND", 
+    "state" : "NORMAL", 
+    "sort" : NumberInt(1004), 
+    "robotService" : true, 
+    "betAnalysis" : false, 
+    "retryConnection" : true, 
+    "updateTime" : ISODate("2019-09-27T07:16:53.171+0000"), 
+    "createTime" : ISODate("2019-09-27T07:16:53.171+0000"), 
+    "rooms" : [
+        {
+            "roomId" : NumberInt(308), 
+            "name" : "新手房", 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "roomType" : "NOVICE", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0), 
+            "config" : {
+                "minBet" : 1, 
+                "serviceCharge" : NumberInt(0), 
+                "minEntry" : 20, 
+                "maxEntry" : NumberInt(10000),
+                "commissionRate" : 0.03,
+                "robotMinAmount" : 20
+            }
+        }, 
+        {
+            "roomId" : NumberInt(309), 
+            "name" : "进阶房", 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "roomType" : "ADVANCED", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0), 
+            "config" : {
+                "minBet" : 5, 
+                "serviceCharge" : NumberInt(0), 
+                "minEntry" : 100, 
+                "maxEntry" : NumberInt(50000),
+                "commissionRate" : 0.03,
+                "robotMinAmount" : 100
+            }
+        }, 
+        {
+            "roomId" : NumberInt(310), 
+            "name" : "高手房", 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "roomType" : "SUPERIOR", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0), 
+            "config" : {
+                "minBet" : 25, 
+                "serviceCharge" : NumberInt(0), 
+                "minEntry" : 500, 
+                "maxEntry" : NumberInt(-1),
+                "commissionRate" : 0.03,
+                "robotMinAmount" : 500
+            }
+        }, 
+        {
+            "roomId" : NumberInt(311), 
+            "name" : "土豪房", 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "roomType" : "TUHAO", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0), 
+            "config" : {
+                "minBet" : 100, 
+                "serviceCharge" : NumberInt(0), 
+                "minEntry" : 2000, 
+                "maxEntry" : NumberInt(-1),
+                "commissionRate" : 0.03,
+                "robotMinAmount" : 2000
+            }
+        }
+    ], 
+    "classify" : NumberInt(2), 
+    "classifyOnlineFlag" : true
+});
+
+db.brand.update({brand: "sqp01"},{$addToSet: {"games": 
+{ 
+    "gameId" : NumberInt(36), 
+    "gameName" : "两人麻将", 
+    "icon" : "/assets/ui/game/icon_game_lrmj_00.png", 
+    "state" : "NORMAL", 
+    "sort" : NumberInt(1004), 
+    "updateTime" : ISODate("2019-09-27T07:16:53.171+0000"), 
+    "rooms" : [
+        {
+            "roomId" : NumberInt(5005), 
+            "parentId": NumberInt(308), 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0)
+        }, 
+        {
+            "roomId" : NumberInt(5006), 
+            "parentId": NumberInt(309), 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0)
+        }, 
+        {
+            "roomId" : NumberInt(5007), 
+            "parentId": NumberInt(310), 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0)
+        }, 
+        {
+            "roomId" : NumberInt(5008), 
+            "parentId": NumberInt(311), 
+            "icon" : "/assets/ui/room/img_fangjian_fang_03.png", 
+            "state" : "NORMAL", 
+            "sort" : NumberInt(0)
+        }
+    ], 
+    "classify" : NumberInt(2), 
+    "classifyOnlineFlag" : true
+}}});
+

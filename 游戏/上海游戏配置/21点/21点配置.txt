@@ -1,0 +1,25 @@
+game:
+  id: 23
+  name: 二十一点
+  table-cache-second: 900
+  max_table_cycle_seconds: 240
+  bet_timeout: 12000
+  insurance_timeout: 13000
+  launch_timeout: 4000
+  dealer_timeout: 1000
+  dealer_operator_timeout: 2500
+  player_timeout: 10000
+  insurance_execute_timeout: 2000
+  not_insurance_timeout: 1000
+
+  match:
+    wait-queue-capacity: 50
+    threads: 2
+    max-wait-seconds: 2
+    max-person: 5
+  timeout:
+    wait-queue-capacity: 100
+    threads: 2
+    batch-tasks: 5
+  api:
+    enable-inner-version: true

@@ -1,0 +1,250 @@
+进入准备状态
+	cmd:onReady
+	data:{
+		peoples:[	//桌面显示的4个人的数据
+			{
+				name:"xxxx",		//string 显示的用户昵称
+				money:123456,		//float 显示的用户当前拥有筹码
+				avator:1,			//int 用户头像编号 1 - 12
+			},
+			{
+				name:"xxxx",		//string 显示的用户昵称
+				money:123456,		//float 显示的用户当前拥有筹码
+				avator:1,			//int 用户头像编号 1 - 12
+			},
+			{
+				name:"xxxx",		//string 显示的用户昵称
+				money:123456,		//float 显示的用户当前拥有筹码
+				avator:1,			//int 用户头像编号 1 - 12
+			},
+			{
+				name:"xxxx",		//string 显示的用户昵称
+				money:123456,		//float 显示的用户当前拥有筹码
+				avator:1,			//int 用户头像编号 1 - 12
+			}
+		],
+		mine:{	//玩家自己的数据
+			name:"xxxx",		//string 显示的用户昵称
+			money:123456,		//float 显示的用户当前拥有筹码
+			avator:1,			//int 用户头像编号 1 - 12
+		},
+		all:{	//其他所有人
+			online:"当前在线:998"			//string 当前在线人数，或其他，由服务器定义下发
+		}
+	}
+	测试示例脚本：
+	window["MessageController"].onReady({peoples:[{name:"第一个傻逼",money:99999,avator:1},{name:"第2个傻逼",money:88888,avator:2},{name:"第3个傻逼",money:77777,avator:3},{name:"第4个傻逼",money:66666,avator:4}],mine:{name:"玩家自己的名字",money:5555,avator:8},all:{online:"当前在线:999"}});
+	
+发牌
+	cmd:onSendPoker
+	data:{
+		name:"dragon",	//string 发牌给谁？dragon -龙，tiger - 虎
+		//poker:52,		//int 发的什么牌？	[1-13]黑桃A、2、3、4、5、6、7、8、9、10、J、Q、K
+											[14-26]红桃A、2、3、4、5、6、7、8、9、10、J、Q、K
+											[27-39]梅花A、2、3、4、5、6、7、8、9、10、J、Q、K
+											[40-52]方块A、2、3、4、5、6、7、8、9、10、J、Q、K
+											[53、54]小王、大王
+						//具体下发什么牌，此处移除掉，在开牌时再下发
+											
+		
+	}
+	
+	测试示例脚本：
+	window["MessageController"].onSendPoker({name:"dragon"});
+	window["MessageController"].onSendPoker({name:"tiger"});
+	
+	
+开始下注	//开始下注动画播放、下注区闪亮提示、等待玩家或其他人下注
+	cmd:onStartBet
+	data:{
+		
+	}
+	
+	测试示例脚本：
+	window["MessageController"].onStartBet({});
+	
+玩家下注确认
+	cmd:onBet
+	data:{
+		betAreaId:0,	//int 下注区域编号 0、2、3、4、5、6、7、8、9、10、11、12、13 申请下注时提交，原样下发
+		betNum:[
+			10,20,30	//int[] 当前的下注筹码，整形数组，申请下注时提交，原样下发
+		]
+	}
+	
+	测试示例脚本：
+	window["MessageController"].onBet({betAreaId:0,betNum:[10,20,30]});
+
+别人下注信息
+	cmd:onOtherBet
+	data:[					//数组，所有新增下注区域的下注情况
+		{					//本次新增的下注，按区域分的数据对象
+			betAreaId:0,	//该区域编号，与上同
+			betNow:500,		//本次该区域新增筹码量
+			mineBet:0,		//玩家在该区域的筹码量
+			totalBet:600	//该区域总的筹码量
+		},
+		{					//本次新增的下注，按区域分的数据对象
+			betAreaId:2,	//该区域编号，与上同
+			betNow:500,		//本次该区域新增筹码量
+			mineBet:0,		//玩家在该区域的筹码量
+			totalBet:600	//该区域总的筹码量
+		}
+		...
+	]
+
+	测试示例脚本：
+	window["MessageController"].onOtherBet([{betAreaId:0,betNow:1000},{betAreaId:2,betNow:1000},{betAreaId:3,betNow:1000},{betAreaId:4,betNow:1000},{betAreaId:5,betNow:1000},{betAreaId:6,betNow:1000},{betAreaId:7,betNow:1000},{betAreaId:8,betNow:1000},{betAreaId:9,betNow:1000},{betAreaId:10,betNow:1000},{betAreaId:11,betNow:1000},{betAreaId:12,betNow:1000},{betAreaId:13,betNow:1000}]);
+	
+
+停止下注
+	cmd:onStopBet
+	data:{
+		
+	}
+	
+	测试示例脚本：
+	window["MessageController"].onStopBet({});
+	
+亮牌
+	cmd:onShowPoker
+	data:{
+		name:"dragon",	//string 要亮谁的牌？dragon 龙，tiger 虎
+		
+		
+		poker:52,		//int 发的什么牌？	[1-13]黑桃A、2、3、4、5、6、7、8、9、10、J、Q、K
+											[14-26]红桃A、2、3、4、5、6、7、8、9、10、J、Q、K
+											[27-39]梅花A、2、3、4、5、6、7、8、9、10、J、Q、K
+											[40-52]方块A、2、3、4、5、6、7、8、9、10、J、Q、K
+											[53、54]小王、大王
+	}
+	
+	测试示例脚本：
+	window["MessageController"].onShowPoker({name:"dragon",poker:50});
+	window["MessageController"].onShowPoker({name:"tiger",poker:40});
+	
+	
+派奖
+	cmd:onAward
+	data:{
+		godealer:[			//派奖阶段一：筹码回荷官
+			{
+				betAreaId:0,		//区域编号
+				godealer:true		//是否输掉，true 为输掉，会被荷官收走，false 为赢区，荷官不会收。
+			},
+			{
+				betAreaId:2,
+				godealer:false
+			}
+			...
+		],
+		remainTime:1,		//筹码飞回荷官后，等待结算一定时间，再分发给玩家和其它用户
+		tickTime:1000,		//等待时间的间隔
+		distribute:[		//派奖阶段二：筹码分发到玩家
+			{
+				betAreaId:-1,	//有筹码分发的区域，-1 为荷官手里。
+				money:100		//要从该区域分发给玩家的金额，比如该区域总共1000，而仅需分发100，前端会筛选10%进行分发动画
+			},
+			{
+				betAreaId:2,
+				money:200
+			}
+		]
+	}
+	
+	
+	示例：
+	window["MessageController"].onAward({godealer:[{betAreaId:0,godealer:true},{betAreaId:2,godealer:true},{betAreaId:3,godealer:true},{betAreaId:4,godealer:true},{betAreaId:5,godealer:false},{betAreaId:6,godealer:false},{betAreaId:7,godealer:false},{betAreaId:8,godealer:false},{betAreaId:9,godealer:false},{betAreaId:10,godealer:false},{betAreaId:11,godealer:false},{betAreaId:12,godealer:false},{betAreaId:13,godealer:true}],remainTime:1,tickTime:1000,distribute:[{betAreaId:-1,money:100},{betAreaId:5,money:100},{betAreaId:6,money:100},{betAreaId:7,money:100},{betAreaId:8,money:100},{betAreaId:9,money:100},{betAreaId:10,money:100},{betAreaId:11,money:100},{betAreaId:12,money:100}]});
+	
+	
+清理桌台
+	cmd:onClearDesk
+	data:{
+	}
+	
+	
+===》通知服务器，请求当前房间列表信息:
+	{
+		code:1010,
+		data:{}
+	}	
+	
+《===下发房间配置信息及初始房间路单
+	code:5021
+	cmd:onRoomInfo
+	data:{
+	}
+	
+	全量数据结构详情参见：test_room_data.json
+	示例：
+	window["MessageController"].onRoomInfo([{"desc":"新手房","roomid":0,"levelId":0,"state":"NORMAL","tables":[{"tableinfo":{"id":1,"name":"A 001","allowin":"准入 1000","betamount":"押注限额 10000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,[4,1],2,2,2,2],[2,[3,1],2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2]]},{"tableinfo":{"id":2,"name":"A 002","allowin":"准入 2000","betamount":"押注限额 20000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1]]},{"tableinfo":{"id":3,"name":"A 003","allowin":"准入 3000","betamount":"押注限额 30000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,[4,1],2,2,2,2]]},{"tableinfo":{"id":4,"name":"A 004","allowin":"准入 4000","betamount":"押注限额 40000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,2,2,1,2,2],[2,2,2,2,2,2]]}]},{"desc":"初级房","roomid":1,"levelId":1,"state":"NORMAL","tables":[{"tableinfo":{"id":1,"name":"B 001","allowin":"准入 1000","betamount":"押注限额 10000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,[4,1],2,2,2,2],[2,[3,1],2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2]]},{"tableinfo":{"id":2,"name":"B 002","allowin":"准入 2000","betamount":"押注限额 20000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1]]},{"tableinfo":{"id":3,"name":"B 003","allowin":"准入 3000","betamount":"押注限额 30000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,[4,1],2,2,2,2]]},{"tableinfo":{"id":4,"name":"B 004","allowin":"准入 4000","betamount":"押注限额 40000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,2,2,1,2,2],[2,2,2,2,2,2]]}]},{"desc":"中级房","roomid":2,"levelId":2,"state":"NORMAL","tables":[{"tableinfo":{"id":1,"name":"C 001","allowin":"准入 1000","betamount":"押注限额 10000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,[4,1],2,2,2,2],[2,[3,1],2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2]]},{"tableinfo":{"id":2,"name":"C 002","allowin":"准入 2000","betamount":"押注限额 20000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1]]},{"tableinfo":{"id":3,"name":"C 003","allowin":"准入 3000","betamount":"押注限额 30000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,[4,1],2,2,2,2]]},{"tableinfo":{"id":4,"name":"C 004","allowin":"准入 4000","betamount":"押注限额 40000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,2,2,1,2,2],[2,2,2,2,2,2]]}]},{"desc":"高级房","roomid":3,"levelId":3,"state":"NORMAL","tables":[{"tableinfo":{"id":1,"name":"D 001","allowin":"准入 1000","betamount":"押注限额 10000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,[4,1],2,2,2,2],[2,[3,1],2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2]]},{"tableinfo":{"id":2,"name":"D 002","allowin":"准入 2000","betamount":"押注限额 20000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1]]},{"tableinfo":{"id":3,"name":"D 003","allowin":"准入 3000","betamount":"押注限额 30000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,[4,1],2,2,2,2]]},{"tableinfo":{"id":4,"name":"D 004","allowin":"准入 4000","betamount":"押注限额 40000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,2,2,1,2,2],[2,2,2,2,2,2]]}]}])
+	
+	
+《===刷新单个房间信息
+	code:5021
+	cmd: onRoomInfo
+	data: 见 test_room_data_one.json
+	示例：
+	同时刷新房间状态及房间路单：
+	window["MessageController"].onRoomInfo([{"desc":"新手房","roomid":0,"levelId":0,"state":"NORMAL","tables":[{"tableinfo":{"id":1,"name":"A 001","allowin":"准入 1000","betamount":"押注限额 10000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2]]}]}]);
+	
+	单独刷新房间状态：
+	window["MessageController"].onRoomInfo([{"desc":"新手房","roomid":1,"levelId":1,"state":"PAUSE","tables":[{"tableinfo":{"id":1,"name":"A 001","allowin":"准入 1000","betamount":"押注限额 10000","status":{"id":2,"name":"下注中","remainTime":12,"timeName":"S","tickTime":1000,"config":[{"id":0,"remainTime":3,"statusName":"准备中"},{"id":1,"remainTime":3,"statusName":"发牌中"},{"id":2,"remainTime":15,"statusName":"下注中"},{"id":3,"remainTime":3,"statusName":"结算中"},{"id":4,"remainTime":10,"statusName":"派奖中"}]}}}]}])
+	
+	
+	单独刷新房间路单：
+	window["MessageController"].onRoomInfo([{"desc":"新手房","roomid":0,"levelId":0,"state":"NORMAL","tables":[{"tableinfo":{"id":1},"bigroadmap":[[1,[3,2],1,1,1,1],[2,[4,3],2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2],[2,2,2,2,2,2]]}]}])
+	
+	
+	
+	http://192.168.11.188:8090/api/v1/gamecenter/player/game/wsUrl/100?token=
+
+	
+	
+===》通知服务器，请求进入某桌台
+	{
+		code:1011,
+		data:{
+			"tableid":123
+		}
+	}
+	
+《===收到进入桌台信息
+	code:5022
+	cmd:onGetinTable
+	data:{
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+Gavin	
+ws://192.168.1.173:8090/game/stake
+gameId 是30
+
+shawn001
+08f23878-54ac-4b93-ab3e-ff36f40c47c3
+
+
